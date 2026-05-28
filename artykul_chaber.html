@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaber Bławatek: Biochemia Uprawy i Właściwości - Grządkowisko</title>
+    
+    <!-- Import szlachetnych czcionek z Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* STYLE GLOBALNE (Modern Vintage) */
+        body {
+            background-color: #FBF9F5; /* Ciepły papier */
+            color: #2A2A2A; /* Matowy grafit */
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; font-size: 17px; line-height: 1.75;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600; letter-spacing: 0.02em; color: #1A1A1A;
+        }
+
+        .site-container {
+            max-width: 850px; /* Wąski, czytelny układ magazynowy */
+            margin: 0 auto; padding: 2rem;
+            display: flex; flex-direction: column; min-height: 92vh;
+        }
+
+        /* NAGŁÓWEK STRONY */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(42,42,42,0.15); padding-bottom: 1.5rem; margin-bottom: 3.5rem;
+        }
+
+        header .logo a { color: #2A2A2A; text-decoration: none; font-weight: bold; letter-spacing: 0.05em; }
+        .nav-links a { color: #2A2A2A; text-decoration: none; margin-left: 2rem; font-size: 0.95rem; }
+        .nav-links a:hover { text-decoration: underline; }
+
+        /* ARTYKUŁ - STRUKTURA */
+        .article-header { text-align: center; margin-bottom: 3rem; }
+        .article-category { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: #556B2F; text-transform: uppercase; letter-spacing: 0.1em; }
+        .article-header h1 { font-size: 3.3rem; margin: 0.5rem 0 1rem 0; line-height: 1.1; }
+        .article-meta { font-size: 0.85rem; color: #777; font-family: monospace; }
+
+        /* Główne, wielkoformatowe zdjęcie z cienką czarną ramką */
+        .main-article-image {
+            border: 1px solid #2A2A2A; padding: 6px; background-color: #FBF9F5;
+            width: 100%; height: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            margin-bottom: 4rem; box-sizing: border-box;
+        }
+
+        /* Sekcje tekstu i list */
+        .article-body h2 { font-size: 2.2rem; margin-top: 3.5rem; margin-bottom: 1.2rem; border-bottom: 1px dashed rgba(85, 107, 47, 0.2); padding-bottom: 0.5rem; }
+        .article-body h3 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 0.8rem; color: #333; }
+        .article-body p { margin-bottom: 1.8rem; text-align: justify; font-weight: 300; }
+        
+        /* Wyrafnowany inicjał (Drop Cap) dla pierwszego akapitu */
+        .article-body p.intro-paragraph::first-letter {
+            font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 400; color: #556B2F;
+            float: left; line-height: 0.8; margin: 0.5rem 0.8rem 0 0;
+        }
+
+        .article-body ul { padding-left: 1.5rem; margin-bottom: 2rem; }
+        .article-body li { margin-bottom: 0.8rem; font-weight: 300; }
+        .article-body li strong { font-weight: 600; color: #1A1A1A; }
+
+        /* Separatory sekcji */
+        hr { border: none; border-top: 1px solid rgba(42,42,42,0.15); margin: 3rem 0; }
+
+        /* BLOCK CALL TO ACTION (Promocja Streamlit Cloud) */
+        .app-promo-box {
+            border: 1px solid #2A2A2A; background-color: #F4F0E6; /* Kolor ziemi */
+            padding: 2.5rem; margin: 4rem 0; position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        .app-promo-box h3 { margin-top: 0; font-size: 1.6rem; color: #1A1A1A; }
+        .app-promo-box p { font-size: 0.95rem; font-weight: 300; line-height: 1.6; margin-bottom: 1.5rem; }
+        
+        .app-btn {
+            display: inline-block; background-color: #556B2F; color: #FBF9F5;
+            padding: 0.7rem 2rem; text-decoration: none; font-size: 0.9rem;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+            border: 1px solid #556B2F; transition: all 0.3s;
+        }
+        .app-btn:hover { background-color: #2A2A2A; border-color: #2A2A2A; }
+
+        /* STOPKA */
+        footer {
+            border-top: 1px solid rgba(42,42,42,0.15); padding: 1.5rem 0; margin-top: 5rem;
+            text-align: center; font-size: 0.85rem; color: #666666; letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="site-container">
+        
+        <!-- Nawigacja -->
+        <header>
+            <div class="logo"><a href="index.html"><strong>GRZĄDKOWISKO</strong></a></div>
+            <nav class="nav-links">
+                <a href="index.html">Strona Główna</a>
+                <a href="interaktywny_zielnik.html">Zielnik</a>
+                <a href="porady_wideo.html">Warsztat (Wideo)</a>
+                <a href="bajki.html">Bajki (Audio)</a>
+                <a href="o-autorce.html">O autorce</a>
+            </nav>
+        </header>
+
+        <!-- Treść Artykułu -->
+        <main class="article-body">
+            
+            <div class="article-header">
+                <span class="article-category">Materiały Monograficzne // Zielnik</span>
+                <h1>Chaber Bławatek:<br>Biochemia Uprawy i Właściwości Lecznicze</h1>
+                <div class="article-meta">AUTOR: INŻ. EMILIA OLSZEWSKA // DATA: 28 MAJA 2026</div>
+            </div>
+
+            <!-- Główne zdjęcie chabra bławatka -->
+            <!-- Zapisz swoje zdjęcie chabra w tym samym folderze jako "chaber_foto.jpg" -->
+            <img src="chaber_foto.jpg" alt="Centaurea cyanus - Chaber Bławatek w pełnym rozkwicie" class="main-article-image">
+
+            <p class="intro-paragraph">
+                Chaber bławatek (<em>Centaurea cyanus</em>) to jedna z najbardziej fascynujących i wszechstronnych roślin naszych rodzimych ekosystemów. Choć przez rolnictwo wielkoobszarowe bywa niesłusznie traktowany jako chwast, w zrównoważonym, ekologicznym ogrodnictwie stanowi bezcenny komponent bioróżnorodności. Jako inżynier ochrony środowiska oraz praktyk z 25-letnim stażem, w moich zapiskach gromadzę wiedzę o tym niezwykłym gatunku, który doskonale łączy w sobie surową biochemię uprawy współrzędnej z potężnymi właściwościami terapeutycznymi.
+            </p>
+
+            <h2>Właściwości i zastosowanie zielarskie</h2>
+            
+            <h3>Co i kiedy zbieramy?</h3>
+            <ul>
+                <li><strong>Surowiec:</strong> Pozyskujemy wyłącznie koszyczki kwiatowe lub same płatki brzeżne (całkowicie usuwając twardy, zielony kielich).</li>
+                <li><strong>Termin:</strong> Zbiory prowadzimy od maja do sierpnia, ściśle w okresie pełnego kwitnienia rośliny.</li>
+                <li><strong>Zasada:</strong> Kwiaty zbieramy wyłącznie w słoneczne, suche dni, tuż po opadnięciu porannej rosy. Wilgoć na płatkach mogłaby doprowadzić do gnicia surowca podczas suszenia.</li>
+            </ul>
+
+            <h3>Jak suszymy?</h3>
+            <ul>
+                <li><strong>Warunki:</strong> Płatki rozkładamy cienką warstwą w miejscu zacienionym, o wysokiej przewiewności (dobrze wentylowany strych lub profesjonalna suszarnia). Temperatura procesu nie powinna przekraczać 35°C.</li>
+                <li><strong>Ważne:</strong> Kluczowym czynnikiem jest całkowity brak dostępu do światła słonecznego podczas suszenia. Promienie UV bezpowrotnie niszczą cenne barwniki antocyjanowe.</li>
+                <li><strong>Efekt:</strong> Prawidłowo wysuszone płatki zachowują swoją intensywnie niebieską, głęboką barwę. Jeśli płatki zbieleją lub zszarzeją – surowiec stracił swoje właściwości lecznicze.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Właściwości lecznicze</h2>
+            <p>
+                Analiza biochemiczna chabra wykazuje bogactwo flawonoidów, antocyjanów, soli mineralnych (szczególnie zasobnych w mangan) oraz związków goryczowych. Dzięki temu surowiec wykazuje silne działanie <strong>przeciwzapalne, moczopędne, przeciwbakteryjne oraz łagodzące</strong>.
+            </p>
+
+            <ul>
+                <li><strong>Oczy:</strong> Napary z płatków chabra to sprawdzony od pokoleń ratunek dla narządu wzroku. Działają kojąco, leczą stany zapalne spojówek oraz niwelują zmęczenie oczu wywołane m.in. długotrwałą pracą przed ekranem monitora.</li>
+                <li><strong>Skóra:</strong> Dzięki właściwościom przeciwbakteryjnym, chaber skutecznie zmniejsza łupież, łagodzi stany zapalne owłosionej skóry głowy oraz wspomaga pielęgnację cery trądzikowej i naczynkowej.</li>
+                <li><strong>Układ moczowy:</strong> Łagodne działanie moczopędne sprawia, że napary z bławatka są doskonałym środkiem wspomagającym leczenie infekcji pęcherza moczowego oraz nerek.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Gdzie dodać płatki chabra?</h2>
+            
+            <ul>
+                <li><strong>Kuchnia:</strong> Świeże lub suszone płatki stanowią zjawiskową, jadalną dekorację letnich sałatek, domowych wypieków, ciast, deserów oraz tortów weselnych.</li>
+                <li><strong>Napary:</strong> Bławatek jest cenionym składnikiem kompozycji herbacianych (przepięknie komponuje się wizualnie i smakowo z klasyczną, czarną herbatą liściastą lub liśćmi mięty).</li>
+                <li><strong>Kosmetyki:</strong> Wyciągi z chabra możesz z powodzeniem wykorzystać w domowym laboratorium do tworzenia naturalnych toników łagodzących do twarzy, płukanek wzmacniających do jasnych włosów oraz autorskich mydeł rzemieślniczych.</li>
+            </ul>
+
+            <!-- INŻYNIERSKI MODUŁ CALL TO ACTION (SYSTEM ZAMKNIĘTY) -->
+            <div class="app-promo-box">
+                <h3>Zaprojektuj sąsiedztwo dla Chabra</h3>
+                <p>
+                    Chaber bławatek wydziela do gleby specyficzne związki biochemiczne (allelopatia), które mogą stymulować wzrost sąsiadujących roślin lub wchodzić z nimi w ukrytą rywalizację. Jako inżynier ochrony środowiska zaprogramowałam dedykowany kalkulator uprawy współrzędnej. Wprowadź swoje rośliny do naszego systemu, a wirtualny asystent wyliczy optymalny układ na Twojej podwyższonej grządce.
+                </p>
+                <a href="https://streamlit.app" class="app-btn" target="_blank">Uruchom Asystenta Grządkowisko ↗</a>
+            </div>
+
+        </main>
+
+        <!-- Stopka autorska -->
+        <footer>
+            <p>&copy; 2026 Grządkowisko. Wszelkie prawa zastrzeżone. &nbsp;|&nbsp; Design: Emilia Olszewska</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
