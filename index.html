@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grządkowisko - Twój Wirtualny Asystent Ogrodniczy</title>
+    
+    <!-- Import szlachetnych czcionek z Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           STYLE GLOBALNE WITRYNY (Modern Vintage)
+           ========================================================================== */
+        body {
+            background-color: #FBF9F5; /* Kolor ciepłego papieru czerpanego */
+            color: #2A2A2A; /* Matowy grafit zamiast ostrej czerni */
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            color: #1A1A1A;
+        }
+
+        /* ==========================================================================
+           INTERAKTYWNY EKRAN STARTOWY (INTRO ANIMACJA)
+           ========================================================================== */
+        #grzadkowisko-intro {
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-color: #231F20; /* Ciemna, wilgotna ziemia */
+            z-index: 999999;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            transition: opacity 1.2s ease-in-out, visibility 1.2s;
+        }
+
+        .intro-canvas { 
+            text-align: center; 
+            width: 100%; 
+            max-width: 500px; 
+            padding: 20px; 
+        }
+
+        .intro-brand {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-size: 3.8rem; 
+            font-weight: 400; 
+            color: #FBF9F5;
+            margin: 0; 
+            letter-spacing: 0.05em; 
+            opacity: 0;
+            animation: textAppear 1.2s ease-out 0.2s forwards;
+        }
+
+        .botanical-scene { 
+            width: 100%; 
+            height: auto; 
+            margin-top: -10px; 
+        }
+
+        /* Majowy deszczyk */
+        .rain { 
+            stroke: #A2B5CD; 
+            stroke-width: 1.5; 
+            stroke-linecap: round; 
+            opacity: 0; 
+            transform: translateY(-40px); 
+            animation: fallRain 0.6s linear 1.2s 2; 
+        }
+        .r2 { animation-delay: 1.4s; } 
+        .r3 { animation-delay: 1.3s; } 
+        .r4 { animation-delay: 1.5s; }
+
+        .ground-line { 
+            fill: none; 
+            stroke: #3D3536; 
+            stroke-width: 3; 
+            stroke-linecap: round; 
+        }
+
+        /* Wyrastanie łodyg i liści */
+        .blade, .stem {
+            fill: none; 
+            stroke: #6E8B3D; 
+            stroke-width: 2.5; 
+            stroke-linecap: round;
+            stroke-dasharray: 120; 
+            stroke-dashoffset: 120;
+            animation: sprout 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.0s forwards;
+        }
+        .g2 { animation-delay: 2.2s; stroke: #8B9B4C; }
+        .g3 { animation-delay: 2.3s; }
+        .g4 { animation-delay: 2.1s; stroke: #8B9B4C; }
+        .leaf-l { animation-delay: 2.4s; fill: #556B2F; stroke: #556B2F; }
+        .leaf-r { animation-delay: 2.5s; fill: #6E8B3D; stroke: #6E8B3D; }
+        .s-left { stroke: #556B2F; animation-delay: 2.4s; }
+        .s-main { stroke: #4F6128; stroke-width: 3.5; animation-delay: 2.6s; }
+
+        /* Rozkwitanie płatków stokrotek */
+        .daisy-center { 
+            fill: #FFA500; 
+            animation: growCenter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 3.8s forwards; 
+        }
+        .daisy-l .daisy-center { animation-delay: 3.5s; }
+
+        .daisypetals ellipse {
+            fill: #FBF9F5; 
+            opacity: 0; 
+            transform-origin: 250px 70px; 
+            transform: scale(0);
+            animation: openPetals 0.8s cubic-bezier(0.4, 0, 0.2, 1) 4.1s forwards;
+        }
+        .daisy-l .daisypetals ellipse { transform-origin: 185px 90px; animation-delay: 3.7s; }
+
+        /* Animacja motyla pawie oczko */
+        .butterfly {
+            transform: translate(250px, 62px) scale(0); 
+            transform-origin: 0px 0px;
+            opacity: 0;
+            animation: butterflyLanding 1.5s cubic-bezier(0.25, 1, 0.5, 1) 4.8s forwards; 
+        }
+
+        .left-wing {
+            transform-origin: 0px 0px;
+            animation: flutterLeft 0.3s ease-in-out 6.0s infinite alternate;
+        }
+        .right-wing {
+            transform-origin: 0px 0px;
+            animation: flutterRight 0.3s ease-in-out 6.0s infinite alternate;
+        }
+
+        /* KLATKI KLUCZOWE ANIMACJI */
+        @keyframes textAppear { to { opacity: 1; } }
+        @keyframes fallRain {
+            0% { opacity: 0; transform: translateY(-30px); }
+            50% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(110px); }
+        }
+        @keyframes sprout { to { stroke-dashoffset: 0; } }
+        @keyframes growCenter { to { r: 6; } }
+        .daisy-l .daisy-center { to { r: 4.5; } }
+        @keyframes openPetals { to { opacity: 1; transform: scale(1); } }
+
+        @keyframes butterflyLanding {
+            0% { transform: translate(270px, -40px) scale(1.5) rotate(15deg); opacity: 0; }
+            50% { opacity: 1; transform: translate(240px, 30px) scale(1.2) rotate(-10deg); }
+            100% { transform: translate(250px, 62px) scale(0.95) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes flutterLeft {
+            0% { transform: scaleX(1); }
+            100% { transform: scaleX(0.3); }
+        }
+        @keyframes flutterRight {
+            0% { transform: scaleX(1); }
+            100% { transform: scaleX(0.3); }
+        }
+
+        /* Klasa usuwająca intro */
+        .intro-dismiss {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* ==========================================================================
+           PRZYKŁADOWE STYLE STRONY GŁÓWNEJ (Pojawia się po intro)
+           ========================================================================== */
+        .site-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(42,42,42,0.15);
+            padding-bottom: 1.5rem;
+        }
+        .nav-links a {
+            color: #2A2A2A;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+        }
+        .hero {
+            text-align: center;
+            margin: 4rem 0;
+        }
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #556B2F;
+            color: #FBF9F5;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. INTERAKTYWNY EKRAN STARTOWY (PRELOADER) -->
+    <div id="grzadkowisko-intro">
+        <div class="intro-canvas">
+            <h1 class="intro-brand">Grządkowisko</h1>
+            
+            <svg viewBox="0 0 500 220" xmlns="http://w3.org" class="botanical-scene">
+                <!-- Deszcz -->
+                <line class="rain r1" x1="150" y1="-20" x2="140" y2="10" />
+                <line class="rain r2" x1="220" y1="-20" x2="210" y2="20" />
+                <line class="rain r3" x1="300" y1="-20" x2="290" y2="15" />
+                <line class="rain r4" x1="380" y1="-20" x2="370" y2="30" />
+                
+                <!-- Przekopana ziemia -->
+                <path class="ground-line" d="M 50,180 Q 150,175 250,180 T 450,180" />
+                
+                <!-- Zielone liście i trawa -->
+                <path class="blade g1" d="M120,180 Q115,140 100,110" />
+                <path class="blade g2" d="M140,180 Q145,150 155,120" />
+                <path class="blade g3" d="M340,180 Q335,135 320,100" />
+                <path class="blade g4" d="M370,180 Q380,145 395,115" />
+                
+                <path class="blade leaf-l" d="M180,180 Q160,160 165,140 Q180,155 180,180" />
+                <path class="blade leaf-r" d="M250,180 Q275,155 270,135 Q255,160 250,180" />
+                
+                <!-- Łodygi -->
+                <path class="stem s-left" d="M180,180 Q170,130 185,90" />
+                <path class="stem s-main" d="M250,180 Q255,120 250,70" />
+                
+                <!-- Mała stokrotka lewa -->
+                <g class="daisy daisy-l">
+                    <circle class="daisy-center" cx="185" cy="90" r="0" />
+                    <g class="daisypetals">
+                        <ellipse cx="185" cy="80" rx="3" ry="8" /><ellipse cx="185" cy="100" rx="3" ry="8" />
+                        <ellipse cx="175" cy="90" rx="8" ry="3" /><ellipse cx="195" cy="90" rx="8" ry="3" />
+                    </g>
+                </g>
+                
+                <!-- Główna stokrotka środkowa -->
+                <g class="daisy daisy-m">
+                    <circle class="daisy-center" cx="250" cy="70" r="0" />
+                    <g class="daisypetals">
