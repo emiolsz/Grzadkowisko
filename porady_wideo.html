@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porady Wideo i Warsztaty - Grządkowisko</title>
+    
+    <!-- Import czcionek z Google Fonts: Szeryfowa, Bezszeryfowa oraz Odręczna -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Caveat:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* STYLE GLOBALNE (Modern Vintage) */
+        body {
+            background-color: #FBF9F5; /* Ciepły papier */
+            color: #2A2A2A; /* Matowy grafit */
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; font-size: 17px; line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600; letter-spacing: 0.02em; color: #1A1A1A;
+        }
+
+        .site-container {
+            max-width: 1100px; margin: 0 auto; padding: 2rem;
+            display: flex; flex-direction: column; min-height: 92vh;
+        }
+
+        /* NAGŁÓWEK STRONY */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(42,42,42,0.15); padding-bottom: 1.5rem; margin-bottom: 3.5rem;
+        }
+
+        header .logo a { color: #2A2A2A; text-decoration: none; font-weight: bold; letter-spacing: 0.05em; }
+        .nav-links a { color: #2A2A2A; text-decoration: none; margin-left: 2rem; font-size: 0.95rem; }
+        .nav-links a:hover { text-decoration: underline; }
+
+        /* SEKCJA NAGŁÓWKA */
+        .page-header { text-align: center; margin-bottom: 4rem; }
+        .page-header h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
+        .page-header p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; color: #556B2F; margin-top: 0; }
+
+        /* UKŁAD BLOKÓW WIDEO + KARTKA (Video Pipeline) */
+        .video-section {
+            display: flex;
+            flex-direction: column;
+            gap: 5rem; /* Duże odstępy między lekcjami wideo */
+            margin-bottom: 4rem;
+        }
+
+        .video-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            border-bottom: 1px solid rgba(42,42,42,0.1);
+            padding-bottom: 5rem;
+        }
+
+        @media (min-width: 900px) {
+            .video-block {
+                flex-direction: row; /* Wideo obok karteczki na dużych ekranach */
+                align-items: flex-start;
+            }
+            .video-wrapper {
+                flex: 1.3; /* Okno wideo nieco szersze */
+            }
+            .note-wrapper {
+                flex: 1;
+            }
+        }
+
+        /* Responsywny kontener na wideo z YouTube (Zachowuje proporcje 16:9) */
+        .responsive-video {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border: 1px solid #2A2A2A;
+            padding: 4px;
+            background: #FBF9F5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .responsive-video iframe {
+            position: absolute;
+            top: 4px; left: 4px;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            border: none;
+        }
+
+        /* ODRĘCZNA KARTKA PODSUMOWANIA (Twoja wizja UI) */
+        .vintage-note-card {
+            background-color: #FCFBF7; border: 1px solid #E6E1DA; border-radius: 12px;
+            padding: 2rem; box-shadow: 2px 8px 24px rgba(42, 42, 42, 0.04);
+            transform: rotate(0.5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .video-block:nth-child(even) .vintage-note-card {
+            transform: rotate(-0.5deg);
+        }
+
+        .vintage-note-card:hover {
+            transform: rotate(0deg) scale(1.02) !important;
+            box-shadow: 0 12px 30px rgba(42,42,42,0.08);
+        }
+
+        .note-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .note-date { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: #8C867E; }
+        .note-pin { opacity: 0.6; font-size: 1.1rem; }
+        
+        .note-title {
+            font-family: 'Cormorant Garamond', serif !important; font-size: 1.8rem; margin: 0 0 1.2rem 0;
+            color: #1A1A1A; border-bottom: 1px dashed rgba(85, 107, 47, 0.2); padding-bottom: 0.5rem;
+        }
+
+        .note-handwriting {
+            font-family: 'Caveat', cursive; font-size: 1.5rem; line-height: 1.4; color: #2B2927;
+        }
+        .note-handwriting p { margin: 0 0 0.8rem 0; }
+
+        .note-footer {
+            margin-top: 1.5rem; text-align: right; font-family: 'Caveat', cursive; font-size: 1.2rem; color: #556B2F;
+        }
+
+        /* STOPKA */
+        footer {
+            border-top: 1px solid rgba(42,42,42,0.15); padding: 1.5rem 0; margin-top: 5rem;
+            text-align: center; font-size: 0.85rem; color: #666666; letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="site-container">
+        
+        <!-- Nawigacja (Zaktualizowana o nowy link) -->
+        <header>
+            <div class="logo"><a href="index.html"><strong>GRZĄDKOWISKO</strong></a></div>
+            <nav class="nav-links">
+                <a href="index.html">Strona Główna</a>
+                <a href="interaktywny_zielnik.html">Zielnik</a>
+                <a href="porady_wideo.html"><strong>Warsztat (Wideo)</strong></a>
+                <a href="bajki.html">Bajki (Audio)</a>
+                <a href="o-autorce.html">O autorce</a>
+            </nav>
+        </header>
+
+        <!-- Główny Moduł Warsztatowy -->
+        <main>
+            <div class="page-header">
+                <h1>Wiadomości z Grządek</h1>
+                <p>Krótkie lekcje wideo, technologia uprawy i inżynieryjne triki ogrodowe</p>
+            </div>
+
+            <div class="video-section">
+
+                <!-- LEKCJA 1: PODWYŻSZONE GRZĄDKI -->
+                <div class="video-block">
+                    <div class="video-wrapper">
+                        <div class="responsive-video">
+                            <!-- TUTAJ WPRZYSZŁOŚCI PODMIENISZ ID FILMU (Zamiast VIDEO_ID_1 wkleisz kod z linku YouTube) -->
+                            <iframe src="https://youtube.com" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="note-wrapper">
+                        <div class="vintage-note-card">
+                            <div class="note-header">
+                                <span class="note-date">Lekcja 01 // Konstrukcja</span>
+                                <span class="note-pin">🎬</span>
+                            </div>
+                            <h3 class="note-title">Dlaczego podwyższone grządki?</h3>
+                            <div class="note-handwriting">
+                                <p>W tym filmie pokazuję, jak inżynieryjnie podejść do budowy skrzyń uprawnych.</p>
+                                <p>Podwyższone grządki to nie tylko wygoda dla kręgosłupa. To przede wszystkim pełna kontrola nad drenażem, temperaturą podłoża (ziemia nagrzewa się wiosną o wiele szybciej!) oraz ochrona ziół przed chwastami i kretami. Zobacz, jak ułożyć warstwy na dnie skrzynek!</p>
+                            </div>
+                            <div class="note-footer">inżynieria środowiska 🌾</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LEKCJA 2: KALENDARZ KSIĘŻYCOWY -->
+                <div class="video-block">
+                    <div class="video-wrapper">
+                        <div class="responsive-video">
+                            <iframe src="https://youtube.com" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="note-wrapper">
+                        <div class="vintage-note-card">
+                            <div class="note-header">
+                                <span class="note-date">Lekcja 02 // Cykle kosmosu</span>
+                                <span class="note-pin">🎬</span>
+                            </div>
+                            <h3 class="note-title">Siew w rytmie Księżyca</h3>
+                            <div class="note-handwriting">
+                                <p>Czy przyciąganie księżycowe ma wpływ na soki wewnątrz małej łodygi? Oczywiście, że tak.</p>
+                                <p>W tym krótkim wideo tłumaczę naukową i tradycyjną stronę kalendarza biodynamicznego. Kiedy Księżyca przybywa, soki idą w górę – to idealny czas na wysiew ziół liściastych. Gdy Księżyca ubywa, energia schodzi do korzeni. Nie marnuj siły nasion, siej w odpowiednim oknie!</p>
+                            </div>
+                            <div class="note-footer">mądrość natury 🌙</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Stopka autorska -->
+        <footer>
+            <p>&copy; 2026 Grządkowisko. Wszelkie prawa zastrzeżone. &nbsp;|&nbsp; Design: Emilia Olszewska</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
