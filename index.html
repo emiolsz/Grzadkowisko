@@ -11,9 +11,7 @@
     <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* ==========================================================================
-           STYLE GLOBALNE WITRYNY (Modern Vintage)
-           ========================================================================== */
+        /* STYLE GLOBALNE WITRYNY (Modern Vintage) */
         body {
             background-color: #FBF9F5; /* Kolor ciepłego papieru czerpanego */
             color: #2A2A2A; /* Matowy grafit zamiast ostrej czerni */
@@ -31,75 +29,42 @@
             color: #1A1A1A;
         }
 
-        /* ==========================================================================
-           INTERAKTYWNY EKRAN STARTOWY (INTRO ANIMACJA)
-           ========================================================================== */
+        /* INTERAKTYWNY EKRAN STARTOWY (INTRO ANIMACJA) */
         #grzadkowisko-intro {
             position: fixed;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-color: #231F20; /* Ciemna, wilgotna ziemia */
             z-index: 999999;
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             transition: opacity 1.2s ease-in-out, visibility 1.2s;
         }
 
         .intro-canvas { 
-            text-align: center; 
-            width: 100%; 
-            max-width: 500px; 
-            padding: 20px; 
+            text-align: center; width: 100%; max-width: 500px; padding: 20px; 
         }
 
         .intro-brand {
             font-family: 'Cormorant Garamond', serif !important;
-            font-size: 3.8rem; 
-            font-weight: 400; 
-            color: #FBF9F5;
-            margin: 0; 
-            letter-spacing: 0.05em; 
-            opacity: 0;
+            font-size: 3.8rem; font-weight: 400; color: #FBF9F5;
+            margin: 0; letter-spacing: 0.05em; opacity: 0;
             animation: textAppear 1.2s ease-out 0.2s forwards;
         }
 
-        .botanical-scene { 
-            width: 100%; 
-            height: auto; 
-            margin-top: -10px; 
-        }
+        .botanical-scene { width: 100%; height: auto; margin-top: -10px; }
 
         /* Majowy deszczyk */
         .rain { 
-            stroke: #A2B5CD; 
-            stroke-width: 1.5; 
-            stroke-linecap: round; 
-            opacity: 0; 
-            transform: translateY(-40px); 
-            animation: fallRain 0.6s linear 1.2s 2; 
+            stroke: #A2B5CD; stroke-width: 1.5; stroke-linecap: round; opacity: 0; 
+            transform: translateY(-40px); animation: fallRain 0.6s linear 1.2s 2; 
         }
-        .r2 { animation-delay: 1.4s; } 
-        .r3 { animation-delay: 1.3s; } 
-        .r4 { animation-delay: 1.5s; }
+        .r2 { animation-delay: 1.4s; } .r3 { animation-delay: 1.3s; } .r4 { animation-delay: 1.5s; }
 
-        .ground-line { 
-            fill: none; 
-            stroke: #3D3536; 
-            stroke-width: 3; 
-            stroke-linecap: round; 
-        }
+        .ground-line { fill: none; stroke: #3D3536; stroke-width: 3; stroke-linecap: round; }
 
         /* Wyrastanie łodyg i liści */
         .blade, .stem {
-            fill: none; 
-            stroke: #6E8B3D; 
-            stroke-width: 2.5; 
-            stroke-linecap: round;
-            stroke-dasharray: 120; 
-            stroke-dashoffset: 120;
+            fill: none; stroke: #6E8B3D; stroke-width: 2.5; stroke-linecap: round;
+            stroke-dasharray: 120; stroke-dashoffset: 120;
             animation: sprout 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.0s forwards;
         }
         .g2 { animation-delay: 2.2s; stroke: #8B9B4C; }
@@ -112,36 +77,24 @@
 
         /* Rozkwitanie płatków stokrotek */
         .daisy-center { 
-            fill: #FFA500; 
-            animation: growCenter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 3.8s forwards; 
+            fill: #FFA500; animation: growCenter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 3.8s forwards; 
         }
         .daisy-l .daisy-center { animation-delay: 3.5s; }
 
         .daisypetals ellipse {
-            fill: #FBF9F5; 
-            opacity: 0; 
-            transform-origin: 250px 70px; 
-            transform: scale(0);
+            fill: #FBF9F5; opacity: 0; transform-origin: 250px 70px; transform: scale(0);
             animation: openPetals 0.8s cubic-bezier(0.4, 0, 0.2, 1) 4.1s forwards;
         }
         .daisy-l .daisypetals ellipse { transform-origin: 185px 90px; animation-delay: 3.7s; }
 
         /* Animacja motyla pawie oczko */
         .butterfly {
-            transform: translate(250px, 62px) scale(0); 
-            transform-origin: 0px 0px;
-            opacity: 0;
+            transform: translate(250px, 62px) scale(0); transform-origin: 0px 0px; opacity: 0;
             animation: butterflyLanding 1.5s cubic-bezier(0.25, 1, 0.5, 1) 4.8s forwards; 
         }
 
-        .left-wing {
-            transform-origin: 0px 0px;
-            animation: flutterLeft 0.3s ease-in-out 6.0s infinite alternate;
-        }
-        .right-wing {
-            transform-origin: 0px 0px;
-            animation: flutterRight 0.3s ease-in-out 6.0s infinite alternate;
-        }
+        .left-wing { transform-origin: 0px 0px; animation: flutterLeft 0.3s ease-in-out 6.0s infinite alternate; }
+        .right-wing { transform-origin: 0px 0px; animation: flutterRight 0.3s ease-in-out 6.0s infinite alternate; }
 
         /* KLATKI KLUCZOWE ANIMACJI */
         @keyframes textAppear { to { opacity: 1; } }
@@ -160,67 +113,29 @@
             50% { opacity: 1; transform: translate(240px, 30px) scale(1.2) rotate(-10deg); }
             100% { transform: translate(250px, 62px) scale(0.95) rotate(0deg); opacity: 1; }
         }
+        @keyframes flutterLeft { 0% { transform: scaleX(1); } 100% { transform: scaleX(0.3); } }
+        @keyframes flutterRight { 0% { transform: scaleX(1); } 100% { transform: scaleX(0.3); } }
 
-        @keyframes flutterLeft {
-            0% { transform: scaleX(1); }
-            100% { transform: scaleX(0.3); }
-        }
-        @keyframes flutterRight {
-            0% { transform: scaleX(1); }
-            100% { transform: scaleX(0.3); }
-        }
+        .intro-dismiss { opacity: 0; visibility: hidden; pointer-events: none; }
 
-        /* Klasa usuwająca intro */
-        .intro-dismiss {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* ==========================================================================
-           PRZYKŁADOWE STYLE STRONY GŁÓWNEJ (Pojawia się po intro)
-           ========================================================================== */
-        .site-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        /* STYLE STRONY GŁÓWNEJ (Po kliknięciu intro) */
+        .site-container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(42,42,42,0.15);
-            padding-bottom: 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(42,42,42,0.15); padding-bottom: 1.5rem;
         }
-        .nav-links a {
-            color: #2A2A2A;
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.95rem;
-        }
-        .hero {
-            text-align: center;
-            margin: 4rem 0;
-        }
-        .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-        }
+        .nav-links a { color: #2A2A2A; text-decoration: none; margin-left: 2rem; font-size: 0.95rem; }
+        .hero { text-align: center; margin: 4rem 0; }
+        .hero h2 { font-size: 2.8rem; margin-bottom: 1rem; }
         .cta-button {
-            display: inline-block;
-            background-color: #556B2F;
-            color: #FBF9F5;
-            padding: 0.8rem 2rem;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            margin-top: 1.5rem;
+            display: inline-block; background-color: #556B2F; color: #FBF9F5;
+            padding: 0.8rem 2rem; text-decoration: none; border-radius: 4px; font-weight: 600; margin-top: 1.5rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. INTERAKTYWNY EKRAN STARTOWY (PRELOADER) -->
+    <!-- INTERAKTYWNY EKRAN STARTOWY (PRELOADER) -->
     <div id="grzadkowisko-intro">
         <div class="intro-canvas">
             <h1 class="intro-brand">Grządkowisko</h1>
@@ -256,8 +171,65 @@
                         <ellipse cx="175" cy="90" rx="8" ry="3" /><ellipse cx="195" cy="90" rx="8" ry="3" />
                     </g>
                 </g>
-                
                 <!-- Główna stokrotka środkowa -->
                 <g class="daisy daisy-m">
                     <circle class="daisy-center" cx="250" cy="70" r="0" />
                     <g class="daisypetals">
+                        <ellipse cx="250" cy="56" rx="4" ry="11" /><ellipse cx="250" cy="84" rx="4" ry="11" />
+                        <ellipse cx="236" cy="70" rx="11" ry="4" /><ellipse cx="264" cy="70" rx="11" ry="4" />
+                        <ellipse cx="250" cy="70" rx="4" ry="11" transform="rotate(45 250 70)" />
+                        <ellipse cx="250" cy="70" rx="4" ry="11" transform="rotate(-45 250 70)" />
+                    </g>
+                </g>
+
+                <!-- Motyl Pawie Oczko -->
+                <g class="butterfly">
+                    <g class="wing left-wing">
+                        <path d="M0,0 C-15,-25 -35,-20 -30,5 C-28,15 -15,15 0,0" fill="#A83232" stroke="#231F20" stroke-width="1"/>
+                        <circle cx="-20" cy="-7" r="4" fill="#2B65EC" />
+                        <circle cx="-20" cy="-7" r="2" fill="#000000" />
+                    </g>
+                    <g class="wing right-wing">
+                        <path d="M0,0 C15,-25 35,-20 30,5 C28,15 15,15 0,0" fill="#A83232" stroke="#231F20" stroke-width="1"/>
+                        <circle cx="20" cy="-7" r="4" fill="#2B65EC" />
+                        <circle cx="20" cy="-7" r="2" fill="#000000" />
+                    </g>
+                    <line x1="0" y1="-12" x2="0" y2="8" stroke="#3D2516" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M0,-12 Q-4,-18 -8,-20" fill="none" stroke="#3D2516" stroke-width="0.8"/>
+                    <path d="M0,-12 Q4,-18 8,-20" fill="none" stroke="#3D2516" stroke-width="0.8"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- WŁAŚCIWA TREŚĆ TWOJEJ STRONY GŁÓWNEJ -->
+    <div class="site-container">
+        <header>
+            <div class="logo"><strong>GRZĄDKOWISKO</strong></div>
+            <nav class="nav-links">
+                <a href="#">Zielnik</a>
+                <a href="#">Karty Botaniczne</a>
+                <a href="#">O asystencie</a>
+            </nav>
+        </header>
+
+        <main class="hero">
+            <h2>Tradycyjna mądrość natury.<br>Nowoczesna technologia uprawy.</h2>
+            <p>Poznaj tajniki ziół z autorskimi retro kartami i zaplanuj idealny ogród.</p>
+            <a href="https://streamlit.app" class="cta-button" target="_blank">Uruchom Asystenta ↗</a>
+        </main>
+    </div>
+
+    <!-- SKRYPT JS STERUJĄCY ZNIKANIEM INTRO -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                var introScreen = document.getElementById('grzadkowisko-intro');
+                if(introScreen) {
+                    introScreen.classList.add('intro-dismiss');
+                }
+            }, 7000); 
+        });
+    </script>
+</body>
+</html>
